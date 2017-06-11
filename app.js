@@ -2,6 +2,7 @@ const calcul1 = document.getElementsByName("calcul1")[0]
 const calcul2 = document.getElementsByName("calcul2")[0]
 const operator = document.getElementsByName("operator")[0]
 const formInscription = document.getElementsByName("inscription")[0]
+const formCalculette = document.getElementsByName("calculette")[0]
 
 const updateValues = function () {
   const calcul1Value = parseInt(calcul1.value)
@@ -72,7 +73,8 @@ const processForm = function (e) {
     form.email.after(createElementError("Veuillez saisir votre adresse e-mail"))
     form.email.focus()
   } else {
-    console.log("Formulaire envoyé")
+    formInscription.style.display = "none"
+    formCalculette.style.display = "block"
   }
 }
 
