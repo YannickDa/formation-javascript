@@ -36,6 +36,10 @@ calcul1.addEventListener("keyup", updateValues)
 calcul2.addEventListener("keyup", updateValues)
 operator.addEventListener("change", updateValues)
 
+const isEmpty = function (value) {
+  return value.length === 0
+}
+
 const processForm = function (e) {
   e.preventDefault()
   console.log("Formulaire envoyé")
