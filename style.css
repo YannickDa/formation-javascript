@@ -1,3 +1,7 @@
 form[name="calculette"] {
   display: none;
 }
+
+div.error {
+  color: red;
+}

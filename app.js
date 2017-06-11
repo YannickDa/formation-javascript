@@ -40,15 +40,36 @@ const isEmpty = function (value) {
   return value.length === 0
 }
 
+const createElementError = function (message) {
+  const element = document.createElement("div")
+  element.classList.add("error")
+  element.innerText = message
+
+  return element
+}
+
+const removeErrorsMessage = function () {
+  const errors = document.getElementsByClassName("error")
+  if (errors.length) {
+    for (let i = 0; i < errors.length; i++) {
+      const element = errors[i]
+      const parent = element.parentNode
+      parent.removeChild(element)
+    }
+  }
+}
+
 const processForm = function (e) {
   e.preventDefault()
   const form = e.target
 
+  removeErrorsMessage()
+
   if (isEmpty(form.name.value)) {
-    console.log("Il manque le nom !")
+    form.name.after(createElementError("Veuillez saisir votre nom"))
     form.name.focus()
   } else if (isEmpty(form.email.value)) {
-    console.log("Il manque l'adresse email")
+    form.email.after(createElementError("Veuillez saisir votre adresse e-mail"))
     form.email.focus()
   } else {
     console.log("Formulaire envoyé")
