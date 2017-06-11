@@ -27,7 +27,7 @@ const updateValues = function () {
         break
     }
 
-    console.log(result)
+    document.getElementById("result").innerText = result
   }
 }
 
