@@ -42,7 +42,17 @@ const isEmpty = function (value) {
 
 const processForm = function (e) {
   e.preventDefault()
-  console.log("Formulaire envoyé")
+  const form = e.target
+
+  if (isEmpty(form.name.value)) {
+    console.log("Il manque le nom !")
+    form.name.focus()
+  } else if (isEmpty(form.email.value)) {
+    console.log("Il manque l'adresse email")
+    form.email.focus()
+  } else {
+    console.log("Formulaire envoyé")
+  }
 }
 
 formInscription.addEventListener("submit", processForm)
