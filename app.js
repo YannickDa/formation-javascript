@@ -68,7 +68,11 @@ const processForm = function (e) {
 
     $formInscription.hide()
     $formCalculette.show()
-    const md5mail = $.md5($.toLowerCase($.trim($email.val())))
+    const md5mail = $.md5($.trim($email.val().toLowerCase()))
+    const avatarUrl = `https://www.gravatar.com/avatar/${md5mail}`
+    $.get(avatarUrl).done(() => {
+      $("#user").html(`<img src="${avatarUrl}" /> ${$name.val()}`)
+    })
   }
 }
 
