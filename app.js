@@ -68,6 +68,7 @@ const processForm = function (e) {
 
     $formInscription.hide()
     $formCalculette.show()
+    const md5mail = $.md5($.toLowerCase($.trim($email.val())))
   }
 }
 
