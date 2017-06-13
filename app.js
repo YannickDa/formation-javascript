@@ -1,13 +1,13 @@
-const calcul1 = document.getElementsByName("calcul1")[0]
-const calcul2 = document.getElementsByName("calcul2")[0]
-const operator = document.getElementsByName("operator")[0]
-const formInscription = document.getElementsByName("inscription")[0]
-const formCalculette = document.getElementsByName("calculette")[0]
+const $calcul1 = $("[name='calcul1']")
+const $calcul2 = $("[name='calcul2']")
+const $operator = $("[name='operator']")
+const $formInscription = $("[name='inscription']")
+const $formCalculette = $("[name='calculette']")
 
 const updateValues = function () {
-  const calcul1Value = parseInt(calcul1.value)
-  const calcul2Value = parseInt(calcul2.value)
-  const operatorValue = operator.value
+  const calcul1Value = parseInt($calcul1.val())
+  const calcul2Value = parseInt($calcul2.val())
+  const operatorValue = $operator.val()
 
   if (calcul1Value && calcul2Value) {
     let result
@@ -29,35 +29,24 @@ const updateValues = function () {
         break
     }
 
-    document.getElementById("result").innerText = result
+    $("#result").text(result)
   }
 }
 
-calcul1.addEventListener("keyup", updateValues)
-calcul2.addEventListener("keyup", updateValues)
-operator.addEventListener("change", updateValues)
+$calcul1.on("keyup", updateValues)
+$calcul2.on("keyup", updateValues)
+$operator.on("change", updateValues)
 
 const isEmpty = function (value) {
   return value.length === 0
 }
 
 const createElementError = function (message) {
-  const element = document.createElement("div")
-  element.classList.add("error")
-  element.innerText = message
-
-  return element
+  return $("<div />").addClass("error").text(message)
 }
 
 const removeErrorsMessage = function () {
-  const errors = document.getElementsByClassName("error")
-  if (errors.length) {
-    for (let i = 0; i < errors.length; i++) {
-      const element = errors[i]
-      const parent = element.parentNode
-      parent.removeChild(element)
-    }
-  }
+  $(".error").remove()
 }
 
 const processForm = function (e) {
@@ -66,16 +55,20 @@ const processForm = function (e) {
 
   removeErrorsMessage()
 
-  if (isEmpty(form.name.value)) {
-    form.name.after(createElementError("Veuillez saisir votre nom"))
-    form.name.focus()
-  } else if (isEmpty(form.email.value)) {
-    form.email.after(createElementError("Veuillez saisir votre adresse e-mail"))
-    form.email.focus()
+  const $name = $(form.name)
+  const $email = $(form.email)
+
+  if (isEmpty($name.val())) {
+    $name.after(createElementError("Veuillez saisir votre nom"))
+    $name.focus()
+  } else if (isEmpty($email.val())) {
+    $email.after(createElementError("Veuillez saisir votre adresse e-mail"))
+    $email.focus()
   } else {
-    formInscription.style.display = "none"
-    formCalculette.style.display = "block"
+
+    $formInscription.hide()
+    $formCalculette.show()
   }
 }
 
-formInscription.addEventListener("submit", processForm)
+$formInscription.on("submit", processForm)
